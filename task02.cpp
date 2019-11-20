@@ -26,22 +26,20 @@ byte flipbits(byte in){
 }
 
 void readDate(int* y, int* m, int* d, byte b1, byte b2) {
-	*m = b2 & 0b1111; //mesíc
-    *d = b2>>4 | ((b1 & 0b1)<<4); //den
-    *y = flipbits(b1>>1)>>1; //rok
+	*m = b2 & 0b1111; 
+    *d = b2>>4 | ((b1 & 0b1)<<4); 
+    *y = flipbits(b1>>1)>>1; 
 }
 
 int main()
 {
     FILE * fd = fopen("task02.dat", "rb");
 
-//1
     fread(data, 8, 1, fd);
    	int y, m, d;
    	readDate(&y, &m, &d, data[0], data[1]);
     printf ("John Doe je narozen: %d.%d.%d\n", d, m, y+1900);
 
-//2.
     fread(data, 8, 1, fd);
     readDate(&y, &m, &d, data[0], data[1]);
     printf ("Sam Sepiol je narozen: %d.%d.%d\n", d, m, y+1900);
