@@ -7,3 +7,6 @@ proměnnou `s` by bylo vhodné definovat jako statickou proměnnou uvnitř funkc
 
 ## task02
 zatím nic
+
+## task04
+zatím nic
