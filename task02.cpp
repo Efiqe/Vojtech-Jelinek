@@ -1,19 +1,3 @@
-// int a = 13;
-	// long long i, j;
-	// for (i = 0; i < sizeof(int); i++) {
-		// char byte = ((char*)&a)[i];
-		// for (j = 7; j >= 0; j--) {
-			// char bit = (byte >> j) & 1;
-			// printf("%hhd", bit);
-		// }
-		// printf(" ");	
-	// }
-	// printf("\n");
-	// return 0;
-	
-	//FILE *fp;
-	//fp = fopen("task02.dat", "rb");
-
 /*
 Decode the task02.dat file and find out the birth dates of John Doe and Sam Sepiol.
 

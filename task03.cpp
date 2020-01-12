@@ -1,3 +1,15 @@
+// int i;
+	// int sum = 0;
+	// printf("argc %d\n", argc);
+	
+	// for (i = 0; i < argc; i++) {
+		// printf("argv[%d] = %s\n", i, argv[i]);
+		// sum += atoi(argv[i]);
+	// }
+	// printf("Sum = %d\n", sum);
+	
+	// return 0;
+
 /*
   Write a "task03" program for basic adding. It should handle -f, -i and -v parameters
 
@@ -13,12 +25,54 @@
 */
 
 #include <cstdio>
+#include <stdlib.h>
+#include <cstring>
 
 int main(int argc, char* argv[]) {
-	if (argc == 3){
-		printf("Ahoj");
+	char text[200];
+	int i;
+	int sum = 0;
+	
+	if (strcmp(argv[1], "-f") == 0) {
+		FILE *fp;
+		fp = fopen(argv[2], "rb");
+		
+		while (true) {
+			if (fscanf(fp, "%s", text) == EOF) {
+				break;
+			}
+			sscanf(text, "%d", &i);
+			sum += i;	
+			}
+		printf("%d", sum);	
 	}
-	else {
-		printf("Nejde");
+	
+	if (strcmp(argv[1], "-f") != 0 && strcmp(argv[1], "-i") != 0) {
+		for (i = 0; i < argc; i++) {
+			sum += atoi(argv[i]);
+		}
+	printf("%d", sum);
 	}
+	
+	if (strcmp(argv[1], "-i") == 0) {
+		while (true) {
+			fgets(text, 200, stdin);
+			if (strlen(text) == 1) {
+				break;
+			}
+		sscanf(text, "%d", &i);
+		sum += i;	
+		}	
+	printf("%d", sum);	
+	}
+	
+	// if (strcmp(argv[1], "-v") == 0) {
+		
+	// }
 }
+
+
+
+
+
+
