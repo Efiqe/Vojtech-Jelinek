@@ -9,38 +9,56 @@ separator 0xFF (after N records)
 name1|name2|...|nameN|
 */
 
-
-#include <cstdio>
 #define byte unsigned char
+#define h_bytes unsigned int
+#include <cstdio>
+#include <cstring>
 
-byte data[8];
-
-byte flipbits(byte in){
-  byte result = 0;
-  for(int i = 0; i<8; i++){
-    bool jedenbit = in & (0b1 << i);
-    result |=  jedenbit << (7-i);
-    
-  }
-  return result;
+byte flipbits(byte number) {
+	byte result = 0;
+	for (int i = 0; i < 7; i++) {
+		bool each_bit = number & (0b1 << i);
+		result |= each_bit << (6 - i); 
+	}
+	return result;
 }
 
-void readDate(int* y, int* m, int* d, byte b1, byte b2) {
-	*m = b2 & 0b1111; 
-    *d = b2>>4 | ((b1 & 0b1)<<4); 
-    *y = flipbits(b1>>1)>>1; 
+float toFloat (h_bytes raw_height) {
+	float result;
+	memcpy(&result, &raw_height, sizeof(raw_height));
+	return result;
 }
 
-int main()
-{
-    FILE * fd = fopen("task02.dat", "rb");
-
-    fread(data, 8, 1, fd);
-   	int y, m, d;
-   	readDate(&y, &m, &d, data[0], data[1]);
-    printf ("John Doe je narozen: %d.%d.%d\n", d, m, y+1900);
-
-    fread(data, 8, 1, fd);
-    readDate(&y, &m, &d, data[0], data[1]);
-    printf ("Sam Sepiol je narozen: %d.%d.%d\n", d, m, y+1900);
+h_bytes findHeight(byte first_buffer, byte second_buffer, byte third_buffer, byte fourth_buffer) {
+	h_bytes fourth = fourth_buffer << 24; //8*3
+	h_bytes third = third_buffer << 16;  //8*2	
+	h_bytes second = second_buffer << 8;  //8*1
+	h_bytes first = first_buffer;		   //8*0
+	h_bytes height = fourth | third | second | first;
+	return height;	
 }
+
+int main() {
+	FILE *fp;
+	byte buffer[20];
+	
+	fp = fopen("task02.dat", "rb");
+	fread(buffer, sizeof(buffer), 1, fp);
+	
+	int year = flipbits(buffer[0] >> 1) + 1900;
+	int month = buffer[1] & 0b1111;
+	int day = ((buffer[0] & 0b1) << 4) | (buffer[1] >> 4); 
+	
+	//buffer 2,3,4,5 = vyska Johna
+	
+	h_bytes temp_height = findHeight(buffer[2], buffer[3], buffer[4], buffer[5]);  
+	
+	printf("day: %d\n", day);
+	printf("month: %d\n", month);
+	printf("year: %d\n", year);
+	printf("height: %f", toFloat(temp_height));
+}
+
+
+
+

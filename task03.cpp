@@ -1,3 +1,15 @@
+// int i;
+	// int sum = 0;
+	// printf("argc %d\n", argc);
+	
+	// for (i = 0; i < argc; i++) {
+		// printf("argv[%d] = %s\n", i, argv[i]);
+		// sum += atoi(argv[i]);
+	// }
+	// printf("Sum = %d\n", sum);
+	
+	// return 0;
+
 /*
   Write a "task03" program for basic adding. It should handle -f, -i and -v parameters
 
@@ -12,134 +24,55 @@
     task03 -v 13 4 // should print "sum of 2 arguments is 17"
 */
 
-#include <cstring>
 #include <cstdio>
-void interactive(bool verbose){
-	int i;
-	int sum = 0;
-	char str[255];
-	int counter = 0;
-	while(true){	
-		
-		fgets(str,255,stdin);
-		if (strlen(str) == 1){
-			break;
-		}
-		sscanf(str,"%d",&i);
-		sum += i;
-		counter++;
-	}
-	if (verbose){
-		printf("Sum of %d numbers from standard input is %d",counter,sum);
-	}
-	else{
-		printf("%d",sum);
-	}
-}
-
-void cliData(bool verbose, char* argv[], int argc){
-	int i;
-	int sum = 0;
-	if (verbose){
-		for(int j = 3; j < argc; j++){
-			sscanf(argv[j],"%d",&i);
-			sum += i;
-		}
-		
-	} 
-	else{
-		for(int j = 2; j < argc; j++){	
-			if (strcmp(argv[j],"-v") == 0){
-					verbose = true;
-			}
-			else{
-				sscanf(argv[j],"%d",&i);
-				sum += i;
-			}
-		}
-		
-	}
-	if (verbose){
-		printf("Sum of %d arguments is %d",argc-2,sum);
-	}
-	else{
-		printf("%d",sum);
-	}
-}
-
-void fileData(bool verbose, char* argv[], int position){
-	FILE *fp;
-	char buff[255];
-	int i;
-	int sum = 0;
-	
-	fp = fopen(argv[position],"r");
-	while(true){
-		
-		if(fscanf(fp, "%s", buff)== EOF){
-			break;
-		}
-		sscanf(buff, "%d", &i);
-		sum+=i;
-	}
-	if (verbose){
-		printf("sum of numbers in %s is %d",argv[position],sum);
-	}
-	else{
-		printf("%d", sum);
-	}
-	
-	
-	}
-
+#include <stdlib.h>
+#include <cstring>
 
 int main(int argc, char* argv[]) {
-  bool verbose = false;
-  if (strcmp(argv[1],"-v") == 0){
-	  verbose = true;
-	  if(strcmp(argv[2],"-i") == 0){
-		  interactive(verbose);
-	  }
-	  else if(strcmp(argv[2],"-f") == 0){
-		  fileData(verbose, argv, 3);
-	  }
-	  else{
-		  cliData(verbose,argv,argc);
-	  }
-  }
-  
-  else if (strcmp(argv[1],"-i") == 0){
-	  if (argc > 2){
-		  if(strcmp(argv[2],"-v") == 0){
-			  verbose = true;
-			  interactive(verbose);
-		  }
+	char text[200];
+	int i;
+	int sum = 0;
+	
+	if (strcmp(argv[1], "-f") == 0) {
+		FILE *fp;
+		fp = fopen(argv[2], "rb");
 		
-	  }
-	  else{
-		  interactive(verbose);
-	  }
-  }
-  
-  else if(strcmp(argv[1],"-f") == 0){
-	  if (argc > 3){
-			if(strcmp(argv[2],"-v") == 0){
-				verbose = true;
-				fileData(verbose, argv, 3);
+		while (true) {
+			if (fscanf(fp, "%s", text) == EOF) {
+				break;
 			}
-			else if(strcmp(argv[3],"-v")==0){
-				verbose = true;
-				fileData(verbose, argv, 2);
+			sscanf(text, "%d", &i);
+			sum += i;	
 			}
-	  }
-	  else{
-		  fileData(verbose, argv, 2);
-	  }
-  }
-  
-  else{
-	  cliData(verbose,argv,argc);
-  }
-  
-  
+		printf("%d", sum);	
+	}
+	
+	if (strcmp(argv[1], "-f") != 0 && strcmp(argv[1], "-i") != 0) {
+		for (i = 0; i < argc; i++) {
+			sum += atoi(argv[i]);
+		}
+	printf("%d", sum);
+	}
+	
+	if (strcmp(argv[1], "-i") == 0) {
+		while (true) {
+			fgets(text, 200, stdin);
+			if (strlen(text) == 1) {
+				break;
+			}
+		sscanf(text, "%d", &i);
+		sum += i;	
+		}	
+	printf("%d", sum);	
+	}
+	
+	// if (strcmp(argv[1], "-v") == 0) {
+		
+	// }
 }
+
+
+
+
+
+
