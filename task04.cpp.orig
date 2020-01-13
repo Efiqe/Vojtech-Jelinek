@@ -1,0 +1,52 @@
+<<<<<<< HEAD
+struct Animal {
+  const char* name;
+  virtual const char* whatDoesItSay();
+  // TODO
+}
+
+struct Dog : Animal {
+  // TODO
+}
+
+struct Fox : Animal {
+  // TODO
+}
+
+int main() {
+  Animal* animals[] = {
+    new Dog("dog", "woof"),
+    new Fox("fox", "ringidingidingidingiding")
+  }
+  for(Animal* animal : animals) {
+    animal->whatDoesItSay();
+  }
+  // dog says woof
+  // fox says ringidingidingidingiding
+=======
+struct Animal {
+  const char* name;
+  virtual const char* whatDoesItSay();
+  // TODO
+}
+
+struct Dog : Animal {
+  // TODO
+}
+
+struct Fox : Animal {
+  // TODO
+}
+
+int main() {
+  Animal* animals[] = {
+    new Dog("dog", "woof"),
+    new Fox("fox", "ringidingidingidingiding")
+  }
+  for(Animal* animal : animals) {
+    animal->whatDoesItSay();
+  }
+  // dog says woof
+  // fox says ringidingidingidingiding
+>>>>>>> 518001b820777c88c25a2431828e67055013f853
+}

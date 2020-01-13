@@ -4,3 +4,9 @@
 
 ## task01
 proměnnou `s` by bylo vhodné definovat jako statickou proměnnou uvnitř funkce `toUpper()`. Bylo by vhodné ošetřit situaci, kdy by vstup byl delší než 99 znaků.
+
+## task02
+OK
+
+## task04
+zatím nic

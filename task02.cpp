@@ -1,3 +1,4 @@
+
 /*
 Decode the task02.dat file and find out the birth dates of John Doe and Sam Sepiol.
 
