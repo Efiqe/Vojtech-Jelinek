@@ -1,3 +1,4 @@
+
 struct Animal {
   const char* name;
   virtual const char* whatDoesItSay();

@@ -6,7 +6,7 @@
 proměnnou `s` by bylo vhodné definovat jako statickou proměnnou uvnitř funkce `toUpper()`. Bylo by vhodné ošetřit situaci, kdy by vstup byl delší než 99 znaků.
 
 ## task02
-zatím nic
+OK
 
 ## task04
 zatím nic
